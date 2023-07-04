@@ -1,0 +1,108 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input[type="number"] {
+  width: 80px;
+}
+
+.form-group button[type="submit"] {
+  width: auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-group button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+canvas#survivors-chart {
+  height: 470px !important;
+}
+
+#statistics-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#statistics-container li {
+  margin-bottom: 10px;
+}
+
+#statistics-container li ul {
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+#statistics-container li ul li {
+  margin-bottom: 5px;
+}
+
+.table-container {
+  margin-top: 20px;
+  width: 50%;
+  margin-left: 20px;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.table-container table th,
+.table-container table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.table-container table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+

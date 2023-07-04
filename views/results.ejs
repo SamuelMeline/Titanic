@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Résultats de recherche</title>
+		<link rel="stylesheet" type="text/css" href="/style.css" />
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	</head>
+	<body>
+		<h1>Résultats de recherche</h1>
+
+		<% if (passengers && passengers.length > 0) { %>
+		<h2>Résultats trouvés : <%= passengers.length %></h2>
+		<div id="survivors-chart-container">
+			<canvas id="survivors-chart"></canvas>
+		</div>
+		<div id="statistics-container">
+			<h3>Statistiques :</h3>
+			<ul>
+				<li>Nombre de survivants par sexe :</li>
+				<ul>
+					<li>Hommes : <%= stats.survivorsBySex.male %></li>
+					<li>Femmes : <%= stats.survivorsBySex.female %></li>
+				</ul>
+				<li>
+					Moyenne d'âge : <%= stats.averageAge || 'Non renseigné' %>
+				</li>
+			</ul>
+		</div>
+
+    <button onclick="resetSearch()">Nouvelle recherche</button>
+
+    <div class="table-container">
+			<table>
+				<thead>
+					<tr>
+            <th>Survécu</th>
+						<th>Nom</th>
+						<th>Sexe</th>
+						<th>Âge</th>
+						<th>Frère / Soeur</th>
+						<th>Parent / enfant</th>
+						<th>Lettre de Cabine</th>
+            <th>Numéro de cabine</th>
+					</tr>
+				</thead>
+				<tbody>
+          <% passengers.forEach(function(passenger) { %>
+            <tr>
+              <td><%= passenger.Survived %></td>
+              <td><%= passenger.Name %></td>
+              <td><%= passenger.Sex %></td>
+              <td><%= passenger.Age %></td>
+              <td><%= passenger.SibSp %></td>
+              <td><%= passenger.Parch %></td>
+              <td><%= passenger.Cabin ? passenger.Cabin[0] : 'Non renseigné' %></td>
+              <td><%= passenger.Cabin ? passenger.Cabin.slice(1) : 'Non renseigné' %></td>
+            </tr>
+          <% }); %>
+				</tbody>
+			</table>
+		</div>
+
+		<script>
+			// Créer le graphique des survivants
+			var survivorsChart = new Chart(document.getElementById('survivors-chart'), {
+			  type: 'bar',
+			  data: {
+			    labels: ['Hommes', 'Femmes'],
+			    datasets: [{
+			      label: 'Survivants',
+			      data: [<%= stats.survivorsBySex.male %>, <%= stats.survivorsBySex.female %>],
+			      backgroundColor: ['rgba(54, 162, 235, 0.8)', 'rgba(255, 99, 132, 0.8)'], // Couleurs de remplissage
+			      barThickness: 50,
+			    }],
+			  },
+			  options: {
+			    responsive: true,
+			    scales: {
+			      y: {
+			        beginAtZero: true,
+			        precision: 0,
+			      },
+			    },
+			    plugins: {
+			      legend: {
+			        display: false
+			      },
+			      customLegend: {
+			        labels: [
+			          { text: 'Hommes', color: 'rgba(54, 162, 235, 0.8)' },
+			          { text: 'Femmes', color: 'rgba(255, 99, 132, 0.8)' },
+			        ],
+			        onClick: function(_, index) {
+			          var dataset = survivorsChart.data.datasets[0];
+			          dataset.backgroundColor[index] = dataset.backgroundColor[index] === 'rgba(54, 162, 235, 0.8)' ? 'rgba(255, 99, 132, 0.8)' : 'rgba(54, 162, 235, 0.8)';
+			          survivorsChart.update();
+			        }
+			      }
+			    }
+			  },
+			});
+
+			function resetSearch() {
+			  // Code pour réinitialiser la recherche ici
+			  // Par exemple, rediriger l'utilisateur vers la page de recherche
+			  window.location.href = '/search';
+			}
+		</script>
+
+		<% } else { %>
+		<p>Aucun résultat trouvé.</p>
+		<% } %>
+
+	</body>
+</html>
